@@ -21,6 +21,7 @@ Plugin 'neocomplcache'
 Plugin 'fatih/vim-go'
 Plugin 'scrooloose/nerdtree'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'thoughtbot/vim-rspec'
 " Bundle 'mileszs/ack.vim'
 
 " Color themes
@@ -119,3 +120,10 @@ au FileType go nmap <leader>t <Plug>(go-test)
 
 "
 " autocmd BufWritePre * :%s/\s\+$//e
+
+" Rspec
+let g:rspec_command = "!bundle exec rspec {spec}"
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
