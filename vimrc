@@ -9,6 +9,7 @@ Plugin 'gmarik/vundle'
 
 " My Bundles here:
 Plugin 'vim-ruby/vim-ruby'
+Plugin 'tpope/vim-rails'
 Plugin 'mattn/emmet-vim'
 Plugin 'ctrlp.vim'
 Plugin 'mustache/vim-mustache-handlebars'
@@ -51,7 +52,7 @@ set expandtab
 set number
 set numberwidth=5
 set showmatch
-set wrap
+set nowrap
 set colorcolumn=120
 set title
 set visualbell
@@ -106,9 +107,9 @@ map gs :!git status<CR>
 let g:netrw_liststyle = 3
 
 "Neocomplcache
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_min_syntax_length = 3
+"let g:neocomplcache_enable_at_startup = 1
+"let g:neocomplcache_enable_smart_case = 1
+"let g:neocomplcache_min_syntax_length = 3
 
 " Go setting
 let g:go_play_open_browser = 0
@@ -127,3 +128,6 @@ map <Leader>t :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
+
+" Remove trailling whitespace on :w
+autocmd BufWritePre * :%s/\s\+$//e
