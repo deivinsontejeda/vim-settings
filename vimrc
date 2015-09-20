@@ -104,7 +104,11 @@ map ` :NERDTreeToggle<CR>
 map gs :!git status<CR>
 
 " Set list style
-let g:netrw_liststyle = 3
+let g:netrw_liststyle = 5
+
+" Paste
+:nmap \o :set paste!<CR>
+:nmap \ln :setlocal number!<CR>
 
 "Neocomplcache
 "let g:neocomplcache_enable_at_startup = 1
