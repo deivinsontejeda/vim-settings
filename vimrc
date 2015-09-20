@@ -23,7 +23,8 @@ Plugin 'fatih/vim-go'
 Plugin 'scrooloose/nerdtree'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'thoughtbot/vim-rspec'
-" Bundle 'mileszs/ack.vim'
+Plugin 'pangloss/vim-javascript'
+Bundle 'mileszs/ack.vim'
 
 " Color themes
 Plugin 'Solarized'
@@ -72,7 +73,8 @@ set confirm
 set hidden
 set t_Co=256
 set scrolloff=5
-set listchars=tab:>-,trail:·,extends:>,precedes:<
+"set listchars=tab:>-,trail:·,extends:>,precedes:<
+set listchars=tab:>-,trail:~,extends:>,precedes:<
 set backspace=indent,eol,start
 set hls!
 set statusline+=%F
@@ -80,6 +82,14 @@ set laststatus=2
 set background=dark
 syntax on
 colorscheme solarized
+
+" Search
+" set relativenumber
+" set cursorline
+
+if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
+  set t_Co=256
+endif
 
 " Set for tabs
 :nmap <C-l> :tabnext<CR>
@@ -96,6 +106,7 @@ vnoremap > >gv
 
 " Vim-ruby
 imap <S-CR> <CR><CR>end<Esc>-cc
+imap <C-Return> <CR><CR><C-o>k<Tab>
 
 " Vim Nerdtree
 map ` :NERDTreeToggle<CR>
@@ -111,7 +122,7 @@ let g:netrw_liststyle = 5
 :nmap \ln :setlocal number!<CR>
 
 "Neocomplcache
-"let g:neocomplcache_enable_at_startup = 1
+"let g:neocomplcache_enable_at_startup = 6
 "let g:neocomplcache_enable_smart_case = 1
 "let g:neocomplcache_min_syntax_length = 3
 
@@ -123,8 +134,8 @@ au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
 au FileType go nmap <leader>t <Plug>(go-test)
 
-"
-" autocmd BufWritePre * :%s/\s\+$//e
+" Strip white space
+autocmd BufWritePre * :%s/\s\+$//e
 
 " Rspec
 let g:rspec_command = "!bundle exec rspec {spec}"
