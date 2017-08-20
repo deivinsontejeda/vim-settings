@@ -26,7 +26,7 @@ Plugin 'thoughtbot/vim-rspec'
 Plugin 'pangloss/vim-javascript'
 Plugin 'rking/ag.vim'
 Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'neomake/neomake'
+" Plugin 'neomake/neomake'
 
 " Color themes
 Plugin 'Solarized'
@@ -98,13 +98,18 @@ endif
 :nmap <C-h> :tabprevious<CR>
 :nmap <C-t> :tabnew<CR>
 
+"if has('nvim')
+"  map <BS> :<C-u>tabprevious<CR>
+"endif
+
+
 " Set for CTRL-P
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/build/*
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|node_modules|build|public)$',
-  \ 'file': '\v\.(js|exe|so|dll)$'
+  \ 'dir':  '\v[\/]\.(git|node_modules|build|public|bower_components|dist)$',
+  \ 'file': '\v\.(exe|so|dll)$'
   \ }
 
 " Make < > shifts keep selection
@@ -135,18 +140,19 @@ let g:netrw_liststyle = 5
 
 " Go setting
 let g:go_play_open_browser = 0
-let g:go_fmt_fail_silently = 1
+let g:go_fmt_fail_silently = 0
 let g:go_fmt_command = "goimports"
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_types = 1
-let g:go_highlight_fields = 1
+let g:go_highlight_fields = 0
 let g:go_highlight_build_constraints = 1
 let g:go_def_mapping_enabled=0
 let g:go_fmt_autosave = 1
 let g:go_auto_sameids=1
+let g:go_list_type="quickfix"
 
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
@@ -158,8 +164,8 @@ au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
 au FileType go nmap <Leader>dt <Plug>(go-def-tab)
 au FileType go nmap <Leader>s <Plug>(go-implements)
 
-" let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-" let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 " Strip white space
 autocmd BufWritePre * :%s/\s\+$//e
@@ -190,3 +196,8 @@ highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=bold guifg=#00ff00 gui
 highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=bold guifg=#00ff00 guibg=#00005f
 highlight Search     cterm=bold ctermfg=15 ctermbg=24 gui=bold guifg=#ffffff guibg=#005f87
 
+set timeoutlen=1000 ttimeoutlen=0
+set foldmethod=indent
+set foldnestmax=10
+set nofoldenable
+set foldlevel=2
