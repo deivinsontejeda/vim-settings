@@ -4,6 +4,9 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
 " let Vundle manage Vundle
 Plugin 'gmarik/vundle'
 
@@ -26,6 +29,11 @@ Plugin 'thoughtbot/vim-rspec'
 Plugin 'pangloss/vim-javascript'
 Plugin 'rking/ag.vim'
 Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'evanleck/vim-svelte'
+Plugin 'HerringtonDarkholme/yats.vim'
+Plugin 'prettier/vim-prettier'
+Plugin 'dart-lang/dart-vim-plugin'
 " Plugin 'neomake/neomake'
 
 " Color themes
@@ -75,8 +83,8 @@ set confirm
 set hidden
 set t_Co=256
 set scrolloff=5
-"set listchars=tab:>-,trail:·,extends:>,precedes:<
-set listchars=tab:>-,trail:~,extends:>,precedes:<
+set listchars=tab:>-,trail:·,extends:>,precedes:<
+" set listchars=tab:>-,trail:~,extends:>,precedes:<,eol:$
 set backspace=indent,eol,start
 set hls!
 set statusline+=%F
@@ -107,6 +115,7 @@ endif
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/build/*
+set wildignore+=**/node_modules/**,**/bower_components/**,**/tmp/**,**/dist/**
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|node_modules|build|public|bower_components|dist)$',
   \ 'file': '\v\.(exe|so|dll)$'
@@ -164,7 +173,7 @@ au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
 au FileType go nmap <Leader>dt <Plug>(go-def-tab)
 au FileType go nmap <Leader>s <Plug>(go-implements)
 
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:syntastic_go_checkers = ['go', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 " Strip white space
@@ -201,3 +210,13 @@ set foldmethod=indent
 set foldnestmax=10
 set nofoldenable
 set foldlevel=2
+
+let g:svelte_preprocessor_tags = [
+  \ { 'name': 'ts', 'tag': 'script', 'as': 'typescript' }
+  \ ]
+let g:svelte_preprocessors = ['ts']
+
+" Prettier Settings
+let g:prettier#quickfix_enabled = 0
+let g:prettier#autoformat_require_pragma = 0
+au BufWritePre *.css,*.svelte,*.pcss,*.html,*.ts,*.js,*.json PrettierAsync
